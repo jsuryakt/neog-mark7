@@ -1,12 +1,16 @@
-# Minion Translator
+# Text Emojifier
 
 ## @neogcamp
 
-Do you know minion language? Checkout this translator to understand minion banana language, bababa babanana...
+Do your texts look bland? 
 
-This repo contains source code for my mark6 project hosted at [minion.jsuryakt.codes](https://minion.jsuryakt.codes).
+Want to add some flavours by adding emojis to your text? 
 
-I used [Fun translations API](https://funtranslations.com/api/#minion) to convert input text to minion banana language.
+Checkout this text-transformer to add some emojis to your text
+
+This repo contains source code for my mark7 project hosted at [emoji.jsuryakt.codes](https://emoji.jsuryakt.codes).
+
+I used [Fun translations API](https://funtranslations.com/api/#emoji) to add emojis to text.
 
 ## Installation
 
