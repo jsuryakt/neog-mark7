@@ -22,15 +22,15 @@ function translateToMinion(event) {
   if (input == "") {
     output.innerText = "";
     audiobtn.style.display = "none";
-    alert("Enter something to translate");
+    alert("Enter something to emojify");
   } else {
-    var api = "https://api.funtranslations.com/translate/minion.json";
+    var api = "https://api.funtranslations.com/translate/emoji.json";
     var url = api + "?text=" + input;
     fetch(url)
       .then((response) => response.json())
       .then((json) => {
         translated = json.contents.translated;
-        output.innerText = translated;
+        output.innerHTML = translated;
         audiobtn.style.display = "block";
         textToSpeech();
       })
@@ -39,32 +39,33 @@ function translateToMinion(event) {
 }
 
 var synth = window.speechSynthesis;
-var pitchValue = 2; //0.1 - 2
-var rateValue = 1; //0.1 - 10
-var voiceIndex = 2; // 0-4
+var pitchValue = 0.5; //0.1 - 2
+var rateValue = 0.5; //0.1 - 10
+var voiceIndex = 0; // 0-4
 var utterThis;
 
-function textToSpeech() {
-if (synth.speaking) {
-  console.error("speechSynthesis.speaking");
-  return;
-}
-if (translated !== "") {
-  utterThis = new SpeechSynthesisUtterance(translated);
-  utterThis.onend = function (event) {
-    console.log("SpeechSynthesisUtterance.onend");
-  };
-  utterThis.onerror = function (event) {
-    console.error("SpeechSynthesisUtterance.onerror");
-  };
-
-  utterThis.voice = synth.getVoices()[voiceIndex];
-  utterThis.pitch = pitchValue;
-  utterThis.rate = rateValue;
-}
-}
+function textToSpeech() {}
 function speak() {
-    synth.speak(utterThis);
+  if (synth.speaking) {
+    console.error("speechSynthesis.speaking");
+    return;
+  }
+  if (translated !== "") {
+    utterThis = new SpeechSynthesisUtterance(translated);
+    console.log(utterThis);
+    utterThis.onend = function (event) {
+      console.log("SpeechSynthesisUtterance.onend");
+    };
+    utterThis.onerror = function (event) {
+      console.error("SpeechSynthesisUtterance.onerror");
+    };
+
+    utterThis.voice = synth.getVoices()[voiceIndex];
+    utterThis.pitch = pitchValue;
+    utterThis.rate = rateValue;
+  }
+  console.log(utterThis);
+  synth.speak(utterThis);
 }
 
 audiobtn.addEventListener("click", listenAudio);
@@ -72,4 +73,5 @@ audiobtn.addEventListener("click", listenAudio);
 function listenAudio(event) {
   event.preventDefault();
   speak();
+  console.log("done");
 }
